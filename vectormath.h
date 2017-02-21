@@ -30,8 +30,8 @@ public:
 	float y;
 	Vector2() { x = y = 0; };
 	Vector2(float x, float y);
-	Vector3 operator+(Vector2 const &v);
-	Vector3 operator-(Vector2 const &v);
+	Vector2 operator+(Vector2 const &v);
+	Vector2 operator-(Vector2 const &v);
 	bool operator==(Vector2 const &v);
 	float operator*(Vector2 const &v);
 	void operator*=(const float n);

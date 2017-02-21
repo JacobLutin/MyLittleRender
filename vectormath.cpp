@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cmath>
 
+#include "vectormath.h"
+
 Vector3::Vector3(float x, float y, float z)
 {
 	this->x = x;
@@ -71,23 +73,23 @@ float Vector2::Length()
 
 void Vector2::Print()
 {
-	std::cout << "Vector3 = " << x << " " << y << std::endl;
+	std::cout << "Vector2 = " << x << " " << y << std::endl;
 	return;
 }
 
 Vector2 Vector2::operator+(Vector2 const &v)
 {
-	return Vector3(x + v.x, y + v.y);
+	return Vector2(x + v.x, y + v.y);
 }
 
 Vector2 Vector2::operator-(Vector2 const &v)
 {
-	return Vector3(x - v.x, y - v.y);
+	return Vector2(x - v.x, y - v.y);
 }
 
 float Vector2::operator*(Vector2 const &v)
 {
-	return x * v.x + y * v.y + z * v.z;
+	return x * v.x + y * v.y;
 }
 
 bool Vector2::operator==(Vector2 const &v)
