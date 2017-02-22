@@ -4,9 +4,10 @@
 
 #include "vectormath.h"
 #include "color.h"
+#include "image.h"
 
 void BresenhamLine(const Vector2 start, const Vector2 end, 
-				   const Color color, Color **pixelTab)
+				   const Color color, Image &image)
 {
 	int x0 = (int) start.x;
 	int x1 = (int) end.x; 
@@ -38,11 +39,11 @@ void BresenhamLine(const Vector2 start, const Vector2 end,
 	{
 		if (steep)
 		{
-			pixelTab[x][y] = color;
+			image.setPixel(y, x, color);
 		}
 		else
 		{
-			pixelTab[y][x] = color;
+			image.setPixel(x, y, color);
 		}
 		
 		error += derror;
@@ -59,43 +60,12 @@ void BresenhamLine(const Vector2 start, const Vector2 end,
 
 int main()
 {
+	Image image(Vector2(96, 64), "out.png");
 
-	const int W = 300;
-	const int H = 200;
+	BresenhamLine(Vector2(0, 0), Vector2(96, 48), Color(255, 255, 255), image);
+	BresenhamLine(Vector2(20, 20), Vector2(0, 31), Color(100, 250, 0), image);
 
-	Color **pixelTab;
-	pixelTab = new Color *[H];
-	for (int i = 0; i < H; i++)
-	{
-		pixelTab[i] = new Color[W];
-	}
-
-	
-	for (unsigned int y = 0; y < H; y++)
-	{
-		for (unsigned int x = 0; x < W; x++)
-		{
-			pixelTab[y][x].r = 255;
-			pixelTab[y][x].g = 255;
-			pixelTab[y][x].b = 255;
-		}
-	}
-
-	BresenhamLine(Vector2(0, 0), Vector2(100, 50), Color(0, 0, 0), pixelTab);
-	BresenhamLine(Vector2(0, 50), Vector2(100, 100), Color(100, 250, 0), pixelTab);
-
-	std::ofstream out("out.png");
-	out << "P3\n" << W << "\n" << H << "\n255\n";
-
-	for (unsigned int y = 0; y < H; y++)
-	{
-		for (unsigned int x = 0; x < W; x++)
-		{
-			out << (int) pixelTab[y][x].r << std::endl;
-			out << (int) pixelTab[y][x].g << std::endl;
-			out << (int) pixelTab[y][x].b << std::endl;
-		}
-	}
+	image.Render();
 
 	return 0;
 }

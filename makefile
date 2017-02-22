@@ -1,4 +1,4 @@
-OBJ = raytracer.o vectormath.o
+OBJ = vectormath.o color.o image.o raytracer.o
 
 main: $(OBJ)
 	g++ $^ -g3 -gdwarf -o $@
