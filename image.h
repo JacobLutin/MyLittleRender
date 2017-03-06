@@ -24,4 +24,7 @@ public:
 	Vector2 getSize();
 };
 
+void BresenhamLine(const Vector2 start, const Vector2 end, 
+				   const Color color, Image &image);
+
 #endif
